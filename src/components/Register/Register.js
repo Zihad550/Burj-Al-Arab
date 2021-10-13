@@ -1,13 +1,11 @@
 import { Button, FormControl, TextField } from "@material-ui/core";
-import { GoogleAuthProvider } from "firebase/auth";
 import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 
-const googleProvider = new GoogleAuthProvider();
+const Register = () => {
+  const { register, updateEmail, updatePassword } = useAuth();
 
-const Login = () => {
-  const { brandSignIn, signIn, updateEmail, updatePassword } = useAuth();
   return (
     <div
       style={{
@@ -17,13 +15,13 @@ const Login = () => {
         alignItems: "center",
       }}
     >
-      <h2>Login</h2>
+      <h2>Register</h2>
       <FormControl>
         <TextField
           id="outlined-basic"
           label="Email"
-          type="email"
           onBlur={updateEmail}
+          type="email"
           variant="outlined"
           required
         />
@@ -35,22 +33,15 @@ const Login = () => {
           variant="outlined"
           required
         />
-        <Button varient="outlined" color="primary" onClick={signIn}>
+        <Button varient="outlined" color="primary" onClick={register}>
           Submit
         </Button>
-        <Button
-          varient="contained"
-          onClick={() => brandSignIn(googleProvider)}
-          color="primary"
-        >
-          Signin using Google
-        </Button>
         <small>
-          New user <Link to="/register">Register</Link>
+          Already Registered <Link to="/login">Login</Link>
         </small>
       </FormControl>
     </div>
   );
 };
 
-export default Login;
+export default Register;
